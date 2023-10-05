@@ -39,13 +39,11 @@ for fileName in os.listdir("SAP-pics"):
 
         if flag:
             try:
-                # cv2.imwrite(f"cascade_training/positive/{i}/{len(os.listdir(f'''cascade_training/positive/{i}'''))}.png", screenshot)
                 shutil.copyfile(path, f"cascade_training/positive/{i}/{len(os.listdir(f'''cascade_training/positive/{i}'''))}.png")
             except:
                 pass
         else:
             try:
-                # cv2.imwrite(f"cascade_training/negative/{i}/{len(os.listdir(f'''cascade_training/negative/{i}'''))}.png", screenshot)
                 shutil.copyfile(path, f"cascade_training/negative/{i}/{len(os.listdir(f'''cascade_training/positive/{i}'''))}.png")
             except:
                 pass
