@@ -5,20 +5,20 @@ import shutil
 
 for fileName in os.listdir("SAP-pics"):
     if fileName == '.DS_Store':
-        break
+        continue
 
     path = f"SAP-pics/{fileName}"
 
-    screenshot = cv2.imread(path)
-    # screenshot = cv2.resize(screenshot, (1300, 1200))
+    display = cv2.imread(path)
+    display = cv2.resize(display, (1300, 1200))
 
-    screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2RGB)
-    screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+    display = cv2.cvtColor(display, cv2.COLOR_BGR2RGB)
+    display = cv2.cvtColor(display, cv2.COLOR_RGB2BGR)
 
     cv2.namedWindow("screen")
-    # cv2.moveWindow("screen", 700, 0.png)
+    cv2.moveWindow("screen", 800, 0)
 
-    cv2.imshow("screen", screenshot)
+    cv2.imshow("screen", display)
 
     cv2.waitKey(1)
 
@@ -32,14 +32,21 @@ for fileName in os.listdir("SAP-pics"):
     pets = os.listdir("./cascade_training/positive")
 
     for i in pets:
-        if i in locations:
+        flag = False
+        for j in locations:
+            if j == i:
+                flag = True
+
+        if flag:
             try:
+                # cv2.imwrite(f"cascade_training/positive/{i}/{len(os.listdir(f'''cascade_training/positive/{i}'''))}.png", screenshot)
                 shutil.copyfile(path, f"cascade_training/positive/{i}/{len(os.listdir(f'''cascade_training/positive/{i}'''))}.png")
             except:
                 pass
         else:
             try:
-                shutil.copyfile(path, f"cascade_training/negative/{i}/{len(os.listdir(f'''cascade_training/negative/{i}'''))}.png")
+                # cv2.imwrite(f"cascade_training/negative/{i}/{len(os.listdir(f'''cascade_training/negative/{i}'''))}.png", screenshot)
+                shutil.copyfile(path, f"cascade_training/negative/{i}/{len(os.listdir(f'''cascade_training/positive/{i}'''))}.png")
             except:
                 pass
 
